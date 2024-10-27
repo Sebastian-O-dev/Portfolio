@@ -1,8 +1,8 @@
 import time
 
-print("\nThis program will encode your message (1 word limit, please don't use white-space),\nby adding an (x) amount of +1 'shift' in value to each letter, changing it's position\nin the English alphabet by (x).\n")
-print("If you exceed the last letter of the alphabet, the coding is 'looped around' back to the\nfirst letter of the alphabet.\n")
-print("\\Enter = end of program\\\n")
+print("""\nThis program will encode your message (1 word limit, please don't use white-space),\nby adding an (x) amount of +1 'shift' in value to each letter, changing it's position\nin the English alphabet by (x).\n
+If you exceed the last letter of the alphabet, the coding is 'looped around' back to the\nfirst letter of the alphabet.\n
+\\Enter = end of program\\\n""")
 
 while True:
     
