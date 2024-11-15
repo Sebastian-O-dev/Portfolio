@@ -1,45 +1,36 @@
-import time
+import art
 
-print("""\nThis program will encode your message (1 word limit, please don't use white-space),\nby adding an (x) amount of +1 'shift' in value to each letter, changing it's position\nin the English alphabet by (x).\n
-If you exceed the last letter of the alphabet, the coding is 'looped around' back to the\nfirst letter of the alphabet.\n
-\\Enter = end of program\\\n""")
+print(art.logo)
+
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+            'v', 'w', 'x', 'y', 'z']
+
+
+def caesar(original_text, shift_amount, encode_or_decode):
+
+    output_text = ""
+
+    if encode_or_decode == "decode":
+        shift_amount *= -1
+
+    for letter in original_text:
+        if letter.isalpha():
+            shifted_position = alphabet.index(letter) + shift_amount
+            shifted_position %= len(alphabet)
+            output_text += alphabet[shifted_position]
+        else:
+            output_text += letter
+
+    print(f"Here is the {encode_or_decode}d result: {output_text}")
+
 
 while True:
+
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
+    again = input("\nType \"yes\" if you want to go again. Otherwise, type \"no\".\n").lower()
     
-    shift_input = input("How many +1 'shifts' are to be done to each letter in the message?: ").strip().replace(" ", "")
-
-    if shift_input == "26":
-        print("By selecting 26 as the 'shift', you aren't encoding the message. Try again.")
-        continue
-
-    if shift_input == "":
-        print("\nEnd of program.")
-        break
-
-    if shift_input.isdigit():
-        shift = int(shift_input)
-
-        while True:
-            message = input(
-                "Enter message to be encoded by shifting each letter by " + str(shift) + ": ").upper().strip()
-
-            if message.isalpha():
-                message_list = [ord(i) for i in message]
-
-                unicode_list = [j + shift if j + shift <= 90
-                                            else 65 + ((j + shift - 65) % 26)
-                                            for j in message_list]
-
-                print("Your coded message: " + "".join(chr(k) for k in unicode_list) + "\n")
-                time.sleep(2)
-                
-                print("\n!New word for encoding! \n\\to stop the program press Enter\\\n")
-                break
-            
-            else:
-                    print("Use only letters, try again below")
-                    continue
-
-    else:
-        print("Use only a single number composed of one or more digits, try again below")
-        continue
